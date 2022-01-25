@@ -30,7 +30,9 @@
     <div class="container">
         <h1 class="text-secondary" th:text="${title}"></h1>
         <hr class="border border-success">
-        <a th:href="@{/form}">Client create</a>
+        <p>
+            <a class="btn btn-success btn-xs" th:href="@{/form}">Client create</a>
+        </p>
     
         <table class="table table-striped">
             <thead>
@@ -40,6 +42,7 @@
                     <th>Last name</th>
                     <th>Email</th>
                     <th>Date</th>
+                    <th>Edit</th>
                 </tr>
             </thead>
             <tbody>
@@ -49,6 +52,7 @@
                     <td th:text="${client.lastName}"></td>
                     <td th:text="${client.email}"></td>
                     <td th:text="${client.createAt}"></td>
+                    <td><a class="btn btn-primary btn-xs" th:href="@{/form/} + ${client.id}" th:text="'edit'"></a></td>
                 </tr>
             </tbody>
         </table>

@@ -5,7 +5,6 @@ import java.util.Map;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,21 +14,20 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
-import com.empresa.springboot.app.Client;
-import com.empresa.springboot.app.models.dao.IClientDao;
+import com.empresa.springboot.app.models.entity.Client;
+import com.empresa.springboot.app.models.service.IClientService;
 
 @Controller
 @SessionAttributes("client")
 public class ClientController {
 	
 	@Autowired
-	@Qualifier("clientDaoJPA")
-	private IClientDao clientDao;
+	private IClientService clientService;
 	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String list(Model model) {
 		model.addAttribute("title", "Clients list");
-		model.addAttribute("clients", clientDao.findAll());	
+		model.addAttribute("clients", clientService.findAll());	
 		
 		return "list";
 	}
@@ -49,7 +47,7 @@ public class ClientController {
 			return "form";
 		}
 		
-		clientDao.save(client);
+		clientService.save(client);
 		status.setComplete();
 		return "redirect:list";		
 	}
@@ -59,7 +57,7 @@ public class ClientController {
 		Client client = null;
 		
 		if (id>0) {
-			client = clientDao.findOne(id);
+			client = clientService.findOne(id);
 		} else {
 			return "redirect:/list";			
 		}
@@ -71,7 +69,7 @@ public class ClientController {
 	@RequestMapping(value = "/delete/{id}")
 	public String delete(@PathVariable(value = "id") Long id) {
 		if (id>0) {
-			clientDao.delete(id);				
+			clientService.delete(id);				
 		}
 		return "redirect:/list";
 	}

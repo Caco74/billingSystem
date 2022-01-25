@@ -1,4 +1,4 @@
-package com.empresa.springboot.app;
+package com.empresa.springboot.app.models.entity;
 
 import java.io.Serializable;
 import java.util.Date;

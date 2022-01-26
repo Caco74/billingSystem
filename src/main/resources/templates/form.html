@@ -8,7 +8,7 @@
         <div class="card bg-light">
             <div class="card-header" th:text="${title}"></div>
             <div class="card-body">
-                <form th:action="@{/form}" th:object="${client}" method="post">
+                <form th:action="@{/form}" th:object="${client}" method="post" enctype="multipart/form-data">
                     <div class="form-group">
                         <label class="col-sm-2 form-label">Name</label>
                         <div class="col-12 col-md-6">
@@ -35,6 +35,12 @@
                         <div class="col-12 col-md-6">
                             <input type="text" class="form-control" th:field="*{createAt}" th:errorclass="'form-control alert-danger'">
                             <small class="form-text text-danger" th:if="${#fields.hasErrors('createAt')}" th:errors="*{createAt}"></small>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="file" class="col-sm-2 form-label">Picture</label>
+                        <div class="col-12 col-md-6">
+                            <input type="file" name="file" class="form-control">
                         </div>
                     </div>
                     <div class="form-group">

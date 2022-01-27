@@ -29,3 +29,15 @@ INSERT INTO clients (id, name, last_name, email, create_at, picture) VALUES (27,
 INSERT INTO clients (id, name, last_name, email, create_at, picture) VALUES (28, 'Graciela', 'Plasencia', 'gra_plas@gmail.com', '2021-09-13', '');
 INSERT INTO clients (id, name, last_name, email, create_at, picture) VALUES (29, 'Américo', 'Gallego', 'tolo@gmail.com', '2022-01-03', '');
 INSERT INTO clients (id, name, last_name, email, create_at, picture) VALUES (30, 'Mariano', 'Giaroli', 'nito@gmail.com', '2021-11-23', '');
+
+/* Table products */
+INSERT INTO products (name, price, create_at) VALUES ('Asus Vivobook', 56900, now());
+INSERT INTO products (name, price, create_at) VALUES ('Dell Inspiron 35005 Plata', 94999, now());
+INSERT INTO products (name, price, create_at) VALUES ('Smart Tv TCL Series C71', 89999, now());
+INSERT INTO products (name, price, create_at) VALUES ('Silla Pro Momentum', 22760, now());
+INSERT INTO products (name, price, create_at) VALUES ('Heladera Gafa Hgf367af', 654999, now());
+INSERT INTO products (name, price, create_at) VALUES ('Tablet Samsung Galaxy Tab A7 Lite', 25999, now());
+INSERT INTO products (name, price, create_at) VALUES ('Auriculares In-ear Xiaomi Redmi Airdots 2', 2689, now());
+INSERT INTO products (name, price, create_at) VALUES ('Repetidor de señal Tp Link Re200', 3134, now());
+INSERT INTO products (name, price, create_at) VALUES ('Monopatin Xiaomi Mi Electric Scooter', 71999, now());
+INSERT INTO products (name, price, create_at) VALUES ('Notebook Hp 250 I3 10ma Gen 4gb 1tb', 63999, now());

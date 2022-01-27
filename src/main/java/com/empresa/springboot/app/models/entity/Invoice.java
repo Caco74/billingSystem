@@ -97,8 +97,9 @@ public class Invoice implements Serializable {
 	
 	public Double getTotal() {
 		Double total = 0.0;
+		int size = items.size();
 		
-		for (int i = 0; i < items.size(); i++) {
+		for (int i = 0; i < size; i++) {
 			total += items.get(i).amountCalculate();
 		}
 		return total;

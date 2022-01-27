@@ -41,3 +41,15 @@ INSERT INTO products (name, price, create_at) VALUES ('Auriculares In-ear Xiaomi
 INSERT INTO products (name, price, create_at) VALUES ('Repetidor de señal Tp Link Re200', 3134, now());
 INSERT INTO products (name, price, create_at) VALUES ('Monopatin Xiaomi Mi Electric Scooter', 71999, now());
 INSERT INTO products (name, price, create_at) VALUES ('Notebook Hp 250 I3 10ma Gen 4gb 1tb', 63999, now());
+
+
+/* Table invoices  */
+INSERT INTO invoices (description, observation, client_id, create_at) VALUES ('Invoice office equipament', null, 1, now());
+INSERT INTO invoice_items (quantity, product_id, invoice_id) VALUES (1,10,1);
+INSERT INTO invoice_items (quantity, product_id, invoice_id) VALUES (1,6,1);
+INSERT INTO invoice_items (quantity, product_id, invoice_id) VALUES (1,7,1);
+INSERT INTO invoice_items (quantity, product_id, invoice_id) VALUES (1,4,1);
+
+
+INSERT INTO invoices (description, observation, client_id, create_at) VALUES ('Xiaomi invoice', null, 1, now());
+INSERT INTO invoice_items (quantity, product_id, invoice_id) VALUES (1,9,2);

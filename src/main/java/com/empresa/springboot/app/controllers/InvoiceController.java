@@ -111,5 +111,20 @@ public class InvoiceController {
 		
 		return "redirect:/view/" + invoice.getClient().getId();
 	}
+	
+	@GetMapping("/remove/{id}")
+	public String remove(@PathVariable(value = "id") Long id, RedirectAttributes flash) {
+		Invoice invoice = clientService.findInvoiceById(id);
+		
+		if (invoice != null) {
+			clientService.deleteInvoice(id);
+			flash.addFlashAttribute("success", "Invoice successfully removed");
+			return "redirect:/view/" + invoice.getClient().getId();
+		}
+		
+		flash.addFlashAttribute("error", "Invoice does not exist in the database, could not be deleted.");
+		return "redirect:/list";
+		
+	}
 
 }

@@ -119,7 +119,11 @@ public class Client implements Serializable {
 	public void addInvoice(Invoice invoice) {
 		invoices.add(invoice);
 	}
-
+	
+	@Override
+	public String toString() {
+		return name + " " + lastName;
+	}
 
 	private static final long serialVersionUID = 1L;
 

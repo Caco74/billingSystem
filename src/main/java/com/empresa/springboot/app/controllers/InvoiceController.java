@@ -37,6 +37,21 @@ public class InvoiceController {
 	
 	private final Logger log = LoggerFactory.getLogger(getClass());
 	
+	@GetMapping("/view/{id}")
+	public String view(@PathVariable(value = "id") Long id, Model model, RedirectAttributes flash) {
+		Invoice invoice = clientService.findInvoiceById(id);
+		
+		if (invoice == null) {
+			flash.addFlashAttribute("error", "The invoice does not exist in the database.");
+			return "redirect:/list";
+		}
+		
+		model.addAttribute("invoice", invoice);
+		model.addAttribute("title", "Invoice: ".concat(invoice.getDescription()));
+		
+		return "invoice/view";
+	}
+	
 	@GetMapping("/form/{clientId}")
 	public String create(@PathVariable(value = "clientId") Long clientId, Map<String, Object> model, RedirectAttributes flash) {
 		Client client = clientService.findOne(clientId);

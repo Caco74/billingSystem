@@ -19,6 +19,8 @@ public interface IClientService {
 	
 	public Client findOne(Long id);
 	
+	public Client fetchByIdWithInvoices(Long id);
+	
 	public void delete(Long id);
 	
 	public List<Product> findByName(String term);

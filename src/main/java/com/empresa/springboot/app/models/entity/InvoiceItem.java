@@ -45,6 +45,14 @@ public class InvoiceItem implements Serializable {
 		return quantity.doubleValue() * product.getPrice();
 	}
 
+	public Product getProduct() {
+		return product;
+	}
+
+	public void setProduct(Product product) {
+		this.product = product;
+	}
+
 	private static final long serialVersionUID = 1L;	
 
 }

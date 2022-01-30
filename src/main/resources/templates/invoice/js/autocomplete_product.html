@@ -44,6 +44,11 @@
                     return false;
                 }
             });
+
+            $("form").submit(function() {
+                $("#templateItemsInvoice").remove();
+                return;
+            });
         });
 
         var itemsHelper = {
@@ -68,7 +73,7 @@
             deleteLineInvoice: function(id) {
                 var row = id;
                 $("#row_" + id).remove();
-                console.log(row);
+                console.log(row);   
                 this.calculateGranTotal();
             },
             calculateGranTotal: function() {

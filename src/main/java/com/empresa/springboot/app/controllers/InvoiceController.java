@@ -39,7 +39,8 @@ public class InvoiceController {
 	
 	@GetMapping("/view/{id}")
 	public String view(@PathVariable(value = "id") Long id, Model model, RedirectAttributes flash) {
-		Invoice invoice = clientService.findInvoiceById(id);
+//		Invoice invoice = clientService.findInvoiceById(id);
+		Invoice invoice = clientService.fetchInoviceByIdWithClientWithInvoiceItemWithProduct(id);
 		
 		if (invoice == null) {
 			flash.addFlashAttribute("error", "The invoice does not exist in the database.");

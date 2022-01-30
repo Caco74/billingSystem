@@ -31,4 +31,6 @@ public interface IClientService {
 	
 	public void deleteInvoice(Long id);
 
+	public Invoice fetchInoviceByIdWithClientWithInvoiceItemWithProduct (Long id);
+
 }

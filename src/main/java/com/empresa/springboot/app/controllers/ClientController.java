@@ -4,8 +4,11 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
@@ -13,6 +16,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -35,6 +39,8 @@ import com.empresa.springboot.app.util.paginator.PageRender;
 @SessionAttributes("client")
 public class ClientController {
 
+	protected final Logger logger = LoggerFactory.getLogger(getClass());
+	
 	@Autowired
 	private IClientService clientService;
 	
@@ -72,7 +78,9 @@ public class ClientController {
 	}
 
 	@RequestMapping(value = {"/list","/"}, method = RequestMethod.GET)
-	public String list(@RequestParam(name = "page", defaultValue = "0") int page, Model model) {
+	public String list(@RequestParam(name = "page", defaultValue = "0") int page, Model model,
+			Authentication authentication, HttpServletRequest request) {
+		
 		Pageable pageRequest = PageRequest.of(page, 5);
 
 		Page<Client> clients = clientService.findAll(pageRequest);
@@ -114,7 +122,6 @@ public class ClientController {
 			try {
 				uniqueFilename = uploadFileService.copy(picture);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}			
 
@@ -165,5 +172,5 @@ public class ClientController {
 		}
 		return "redirect:/list";
 	}
-
+	
 }

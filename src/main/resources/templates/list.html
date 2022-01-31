@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://thymeleaf.org">
+<html lang="en" xmlns="http://thymeleaf.org" xmlns:sec="http://thymeleaf.org/extras/spring-security">
 <head th:replace="layouts/layout :: head"></head>
 <body>
     <header th:replace="layouts/layout :: header"></header>
@@ -8,33 +8,33 @@
             <div class="card-header" th:text="${title}"></div>
             <div class="card-body">
                 <h4 class="card-title">
-                    <a class="btn btn-primary btn-xs" th:href="@{/form}">Client create</a>
+                    <a sec:authorize="hasRole('ADMIN')" class="btn btn-primary btn-xs" th:href="@{/form}">Client create</a>
                 </h4>
 
                 <div class="table-responsive">
                     <table class="table table-striped container ms-0">
                         <thead class="table-dark">
                             <tr>
-                                <th>Id</th>
+                                <th sec:authorize="hasRole('USER')">Id</th>
                                 <th>Name</th>
                                 <th>Last name</th>
                                 <th>Email</th>
                                 <th>Date</th>
-                                <th>Create Invoice</th>
-                                <th>Edit</th>
-                                <th>Remove</th>
+                                <th sec:authorize="hasRole('ADMIN')">Create Invoice</th>
+                                <th sec:authorize="hasRole('ADMIN')">Edit</th>
+                                <th sec:authorize="hasRole('ADMIN')">Remove</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr th:each="client: ${clients}">
-                                <td><a class="btn btn-primary btn-xs" th:href="@{/view/} + ${client.id}" th:text="${client.id}"></a></td>
+                                <td sec:authorize="hasRole('USER')"><a class="btn btn-primary btn-xs" th:href="@{/view/} + ${client.id}" th:text="${client.id}"></a></td>
                                 <td th:text="${client.name}"></td>
                                 <td th:text="${client.lastName}"></td>
                                 <td th:text="${client.email}"></td>
                                 <td th:text="${client.createAt}"></td>
-                                <td><a class="btn btn-success btn-xs" th:href="@{/invoice/form/} + ${client.id}" th:text="'New Invoice'"></a></td>
-                                <td><a class="btn btn-primary btn-xs" th:href="@{/form/} + ${client.id}" th:text="'edit'"></a></td>
-                                <td><a class="btn btn-danger btn-xs" th:href="@{/delete/} + ${client.id}" th:text="'Remove'" onclick="return confirm('Are you sure to delete this client?')"></a></td>
+                                <td sec:authorize="hasRole('ADMIN')"><a class="btn btn-success btn-xs" th:href="@{/invoice/form/} + ${client.id}" th:text="'New Invoice'"></a></td>
+                                <td sec:authorize="hasRole('ADMIN')"><a class="btn btn-primary btn-xs" th:href="@{/form/} + ${client.id}" th:text="'edit'"></a></td>
+                                <td sec:authorize="hasRole('ADMIN')"><a class="btn btn-danger btn-xs" th:href="@{/delete/} + ${client.id}" th:text="'Remove'" onclick="return confirm('Are you sure to delete this client?')"></a></td>
                             </tr>
                         </tbody>
                     </table>

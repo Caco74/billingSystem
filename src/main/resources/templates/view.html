@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://thymeleaf.org">
+<html lang="en" xmlns="http://thymeleaf.org" xmlns:sec="http://thymeleaf.org/extras/spring-security">
 <head th:replace="layouts/layout :: head"></head>
 <body>
     
@@ -9,7 +9,7 @@
             <div class="card-header" th:text="${title}"></div>
             <div class="card-body">
                 <h4 class="card-title">
-                    <a href="" class="btn btn-primary btn-xs" th:href="@{/invoice/form/} + ${client.id}" th:text="'New Invoice'"></a>
+                    <a sec:authorize="hasRole('ADMIN')" href="" class="btn btn-primary btn-xs" th:href="@{/invoice/form/} + ${client.id}" th:text="'New Invoice'"></a>
                 </h4>
 
                 <img th:if="${#strings.length(client.picture) > 0}" class="img-thumbnail rounded float-left" style="max-width: 25%;" th:src="@{'/uploads/' + ${client.picture}}" th:alt="${client.picture}"></img>
@@ -28,8 +28,8 @@
                             <th>Description</th>
                             <th>Date</th>
                             <th>Total</th>
-                            <th>View</th>
-                            <th>Delete</th>
+                            <th sec:authorize="hasRole('ADMIN')">View</th>
+                            <th sec:authorize="hasRole('ADMIN')">Delete</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -38,8 +38,8 @@
                             <td th:text="${invoice.description}"></td>
                             <td th:text="${invoice.createAt}"></td>
                             <td th:text="${invoice.total}"></td>
-                            <td><a class="btn btn-primary btn-xs" th:href="@{'/invoice/view/' + ${invoice.id}}" th:text="'Detail'"></a></td>
-                            <td><a class="btn btn-danger btn-xs" th:href="@{'/invoice/remove/' + ${invoice.id}}" th:text="'Delete'" onclick="return confirm('Are you sure want to delete the invoice?');"></a></td>
+                            <td sec:authorize="hasRole('ADMIN')"><a class="btn btn-primary btn-xs" th:href="@{'/invoice/view/' + ${invoice.id}}" th:text="'Detail'"></a></td>
+                            <td sec:authorize="hasRole('ADMIN')"><a class="btn btn-danger btn-xs" th:href="@{'/invoice/remove/' + ${invoice.id}}" th:text="'Delete'" onclick="return confirm('Are you sure want to delete the invoice?');"></a></td>
                         </tr>
                     </tbody>
                 </table>

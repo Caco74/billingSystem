@@ -5,8 +5,11 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.empresa.springboot.app.auth.handler.LoginSuccessHandler;
+import com.empresa.springboot.app.models.service.JpaUserDetailsService;
 
 @Configuration
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
@@ -14,7 +17,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private LoginSuccessHandler successHandler;
 	
-	@Override
+	@Autowired
+	private JpaUserDetailsService userDetailsService;
+	
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
+	
+	/*@Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication()
                 .withUser("daniel")
@@ -24,7 +33,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .withUser("franco")
                 .password("{noop}87654321")
                 .roles("ADMIN","USER");
-    }
+    }*/
+	
+	
 
 
 	@Override
@@ -47,5 +58,16 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		.logout().permitAll()
 		.and()
 		.exceptionHandling().accessDeniedPage("/error_403");
-	}	
+	}
+	
+	@Autowired
+	public void configureGlobal(AuthenticationManagerBuilder build) throws Exception {
+		
+		build.userDetailsService(userDetailsService)
+		.passwordEncoder(passwordEncoder);
+	}
+	
+	
+		
+	
 }

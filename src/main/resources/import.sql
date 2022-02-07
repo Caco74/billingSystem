@@ -53,3 +53,12 @@ INSERT INTO invoice_items (quantity, product_id, invoice_id) VALUES (1,4,1);
 
 INSERT INTO invoices (description, observation, client_id, create_at) VALUES ('Xiaomi invoice', null, 1, now());
 INSERT INTO invoice_items (quantity, product_id, invoice_id) VALUES (1,9,2);
+
+
+/* Users with roles */
+INSERT INTO users (username, password, enabled) VALUES ('franco87', '$2a$10$A/0eWTag8Epb3vpcZq3FIu8FKniMTYZ0nhLTY5jA5BjL3UwNjQvvi', 1);
+INSERT INTO users (username, password, enabled) VALUES ('daniel', '$2a$10$3theZ9i7WdXvErsmbITR2OGOO7nWi0y9smXIveCc0Ar5ik/.eDHMq', 1);
+
+INSERT INTO authorities (user_id, authority) VALUES (1, 'ROLE_USER');
+INSERT INTO authorities (user_id, authority) VALUES (1, 'ROLE_ADMIN');
+INSERT INTO authorities (user_id, authority) VALUES (2, 'ROLE_USER');

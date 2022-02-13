@@ -9,6 +9,7 @@
             <div class="card-body">
                 <h4 class="card-title">
                     <a sec:authorize="hasRole('ADMIN')" class="btn btn-primary btn-xs" th:href="@{/form}">Client create</a>
+                    <a class="btn btn-primary btn-xs float-right mx-1" th:href="@{'/list'(format=json)}">JSON</a>
                 </h4>
 
                 <div class="table-responsive">

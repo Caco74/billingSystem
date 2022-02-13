@@ -11,7 +11,7 @@ import com.empresa.springboot.app.models.entity.Client;
 import com.empresa.springboot.app.models.service.IClientService;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/clients")
 public class ClientRestController {
 	
 	@Autowired

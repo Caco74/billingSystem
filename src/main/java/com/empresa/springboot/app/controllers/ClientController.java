@@ -2,6 +2,7 @@ package com.empresa.springboot.app.controllers;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,6 +26,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
@@ -75,6 +77,11 @@ public class ClientController {
 		model.put("title", "Client Detail: " + client.getName() + " " + client.getLastName());
 
 		return "view";
+	}
+	
+	@GetMapping(value = "/list-rest")
+	public @ResponseBody List<Client> listRest() {
+		return clientService.findAll();		
 	}
 
 	@RequestMapping(value = {"/list","/"}, method = RequestMethod.GET)
